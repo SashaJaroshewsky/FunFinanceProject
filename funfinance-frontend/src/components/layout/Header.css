@@ -1,0 +1,21 @@
+.nav-link.header {
+  color: #ffffff !important; /* жовтий */
+  transition: color 0.3s ease;
+}
+
+.nav-link.header:hover {
+  color: #000000 !important;
+}
+
+/* Індивідуальні кольори для кожного посилання */
+.nav-link.budgets {
+  color: #17a2b8 !important; /* синій */
+}
+
+.nav-link.categories {
+  color: #28a745 !important; /* зелений */
+}
+
+.nav-link.expenses {
+  color: #dc3545 !important; /* червоний */
+}

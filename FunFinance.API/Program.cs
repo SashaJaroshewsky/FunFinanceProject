@@ -1,8 +1,8 @@
-
 using FunFinance.API.Data;
 using FunFinance.API.Repositories;
 using FunFinance.API.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace FunFinance.API
 {
@@ -12,9 +12,24 @@ namespace FunFinance.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000") // URL ������ React �������
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+                });
+            });
+
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => 
                     options.UseSqlServer(
@@ -49,6 +64,8 @@ namespace FunFinance.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowReactApp");
 
             app.UseAuthorization();
 
