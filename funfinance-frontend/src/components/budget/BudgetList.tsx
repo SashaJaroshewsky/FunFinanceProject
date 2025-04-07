@@ -124,7 +124,7 @@ const BudgetList = () => {
                       className="mb-3"
                     />
                     <div className="d-grid gap-2">
-                        <Link to="/budgets/${budget.id}" className="btn btn-primary">
+                        <Link to={`/budgets/${budget.id}`} className="btn btn-primary">
                           Переглянути деталі
                         </Link>
                         <Link to={`/expenses/create?budgetId=${budget.id}`} className="btn btn-outline-primary">

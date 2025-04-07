@@ -18,6 +18,7 @@ import FamilyDetails from './components/family/FamilyDetails';
 // Імпорт компонентів бюджету
 import BudgetList from './components/budget/BudgetList';
 import BudgetForm from './components/budget/BudgetForm';
+import BudgetDetails from './components/budget/BudgetDetails';
 
 // Імпорт компонентів категорій
 import CategoryList from './components/category/CategoryList';
@@ -131,108 +132,160 @@ function App() {
       
       <main className={`container flex-grow-1 py-4 ${currentUser ? (sidebarOpen ? 'content-with-sidebar' : 'content-full') : ''}`}>
         <Routes>
-          <Route path="/login" element={
-            currentUser ? <Navigate to="/" /> : <Login />
-          } />
-          <Route path="/register" element={
-            currentUser ? <Navigate to="/" /> : <Register />
-          } />
+          {/* Auth routes */}
+          <Route 
+            path="/login" 
+            element={currentUser ? <Navigate to="/" /> : <Login />} 
+          />
+          <Route 
+            path="/register" 
+            element={currentUser ? <Navigate to="/" /> : <Register />} 
+          />
           
-          {/* Домашня сторінка */}
+          {/* Home page */}
           <Route path="/" element={<Dashboard />} />
           
-          {/* Маршрути для сімей */}
-          <Route path="/families" element={
-            <ProtectedRoute>
-              <FamilyList />
-            </ProtectedRoute>
-          } />
-          <Route path="/families/create" element={
-            <ProtectedRoute>
-              <FamilyForm />
-            </ProtectedRoute>
-          } />
-          <Route path="/families/:id" element={
-            <ProtectedRoute>
-              <FamilyDetails />
-            </ProtectedRoute>
-          } />
+          {/* Family routes */}
+          <Route 
+            path="/families" 
+            element={
+              <ProtectedRoute>
+                <FamilyList />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/families/create" 
+            element={
+              <ProtectedRoute>
+                <FamilyForm />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/families/:id" 
+            element={
+              <ProtectedRoute>
+                <FamilyDetails />
+              </ProtectedRoute>
+            } 
+          />
           
-          {/* Маршрути для бюджетів */}
-          <Route path="/budgets" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <BudgetList />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/budgets/create" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <BudgetForm />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/budgets/:id/edit" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <BudgetForm />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
+          {/* Budget routes */}
+          <Route 
+            path="/budgets" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <BudgetList />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/budgets/create" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <BudgetForm />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/budgets/:id" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <BudgetDetails />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/budgets/:id/edit" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <BudgetForm />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
           
-          {/* Маршрути для категорій */}
-          <Route path="/categories" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <CategoryList />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/categories/create" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <CategoryForm />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/categories/:id/edit" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <CategoryForm />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
+          {/* Category routes */}
+          <Route 
+            path="/categories" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <CategoryList />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/categories/create" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <CategoryForm />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/categories/:id/edit" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <CategoryForm />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
           
-          {/* Маршрути для витрат */}
-          <Route path="/expenses" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <ExpenseList />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/expenses/create" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <ExpenseForm />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/expenses/:id/edit" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <ExpenseForm />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
-          <Route path="/expenses/analytics" element={
-            <ProtectedRoute>
-              <FamilyRequiredRoute>
-                <ExpenseAnalytics />
-              </FamilyRequiredRoute>
-            </ProtectedRoute>
-          } />
+          {/* Expense routes */}
+          <Route 
+            path="/expenses" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <ExpenseList />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/expenses/create" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <ExpenseForm />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/expenses/:id/edit" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <ExpenseForm />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/expenses/analytics" 
+            element={
+              <ProtectedRoute>
+                <FamilyRequiredRoute>
+                  <ExpenseAnalytics />
+                </FamilyRequiredRoute>
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </main>
       <Footer />
